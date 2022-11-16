@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./jq.min.js"></script>
+<script src="./crypto.js"></script>
+<script src="./jquery-3.6.1.min.js"></script>
+<script src="main.596115b7.js"></script>
+<body>
+<label for="param"></label><input type="text" id="param_1" style="height: 50px;width: 500px"><br>
+
+
+<button id="button1" style="height: 50px;width: 200px">解析参数</button>
+<br>
+<span>解析结果：</span>
+<div id="_p">sss</div>
+方法：
+<label for="method"></label><input type="text" id="method" style="height: 50px;width: 500px"><br>
+参数：
+<label for="param"></label><input type="text" id="param" style="height: 50px;width: 500px"><br>
+
+
+<button id="button" style="height: 50px;width: 200px">根据参数查询</button>
+
+<div>
+
+    param : {"city":"德宏州","type":"HOUR","startTime":"2022-11-14 12:00:36","endTime":"2022-11-15 15:21:36"} method :
+    CETCITYPERIOD
+
+    param : {"city":"德宏州"} method : GETYEARINDEX
+
+    param : {"order":"desc"} method : GETCITYAQIRANK
+
+</div>
+
+</body>
+
+<script>
+    var akb33 = "32223";
+    var akb34 = "N4EDAQpO2ejqgCoX";
+    var akb35 = "=qoKNLgdAjJbU8zx";
+    var akb36 = "mAkJqt8coXQ96zML";
+    var akb48 = "t4ABRmeN";
+    var base64 = new Base64;
+    $("#button1").click(function () {
+        var param = $("#param_1").val()
+        paramObj = JSON.parse(base64.decode(decryptData(param)))
+        var m = paramObj.method
+        var p = paramObj.object
+        $("#_p").text("param : " + JSON.stringify(p) + " method : " + m)
+    })
+
+
+    $("#button").click(function () {
+        var param = $("#param").val()
+        var m = $("#method").val()
+        var p = JSON.parse(param)
+
+        for (let i = 0; i < 1; i++) {
+            $.post("test1",
+                {
+                    param: getParam(m, p)
+                },
+                function (data, status) {
+                    data = base64.decode(decryptData(data))
+                    $.post("test2/" + p.city,
+                        {
+                            data: data
+                        },
+                        function (data, status) {
+                        });
+                });
+
+            $.ajax({
+                type: "get",
+                url: "startTime/" + p.startTime,
+                cache: false,
+                async: false,
+                success: function (xmlobj) {
+                    p.startTime = xmlobj
+                }
+            })
+            $.ajax({
+                type: "get",
+                url: "endTime/" + p.endTime,
+                cache: false,
+                async: false,
+                success: function (xmlobj) {
+                    p.endTime = xmlobj
+                }
+            })
+
+        }
+
+
+    });
+
+</script>
+</html>

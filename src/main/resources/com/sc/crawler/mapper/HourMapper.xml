@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crawler.mapper.HourMapper">
+
+
+    <insert id="save">
+        insert INTO zhenqi_air_quailty.t003_air_city_hour
+        (id,
+        city_name,
+        monitor_time,
+        primary_pollutant,
+        pm10, pm10_iaqi,
+        pm25, pm25_iaqi,
+        co, co_iaqi,
+        no2, no2_iaqi,
+        so2, so2_iaqi,
+        o3,o3_iaqi,
+        aqi,
+        computation_rule,
+        complexindex,
+        windlevel,
+        winddirection,
+        weather
+        )
+        values
+        <foreach collection="list" separator="," item="item">
+            (#{item.id},
+            #{item.cityName},
+            to_timestamp(#{item.monitorTime}, 'yyyy-MM-dd HH24:mi:ss'),
+            #{item.primaryPollutant},
+            #{item.pm10}, #{item.pm10Iaqi},
+            #{item.pm25}, #{item.pm25Iaqi},
+            #{item.co}, #{item.coIaqi},
+            #{item.no2}, #{item.no2Iaqi},
+            #{item.so2}, #{item.so2Iaqi},
+            #{item.o3}, #{item.o3Iaqi},
+            #{item.aqi},
+            #{item.computationRule},
+            #{item.complexindex},
+            #{item.windlevel},
+            #{item.winddirection},
+            #{item.weather}
+            )
+        </foreach>
+    </insert>
+</mapper>
+
