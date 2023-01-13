@@ -1,7 +1,7 @@
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 8027
+  port: 8383
 # MyBatis配置
 mybatis:
   # 加载全局的配置文件
@@ -9,6 +9,9 @@ mybatis:
 # 数据源配置
 spring:
   datasource:
-    url: jdbc:postgresql://172.16.0.170:5432/ryvue
-    username: sctech
-    password: 1qaz!QAZ
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+#    url: jdbc:postgresql://172.16.0.170:5432/ryvue
+#    username: sctech
+#    password: 1qaz!QAZ

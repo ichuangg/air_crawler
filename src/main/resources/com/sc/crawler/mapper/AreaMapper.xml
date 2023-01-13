@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.crawler.mapper.AreaMapper">
+
+
+    <select id="getCitys" resultType="java.lang.String">
+
+        SELECT area_name FROM "t001_area"	WHERE level_code = '3'
+
+    </select>
+</mapper>
+

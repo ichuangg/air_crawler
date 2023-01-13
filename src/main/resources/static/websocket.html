@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./jq.min.js"></script>
+    <script src="./crypto.js"></script>
+    <script src="./jquery-3.6.1.min.js"></script>
+    <script src="main.596115b7.js"></script>
+</head>
+<body>
+
+</body>
+
+<script>
+    // var ws = new WebSocket("ws://172.16.0.170:8383/ws/zq")
+    var ws = new WebSocket("ws://localhost:8383/ws/zq")
+    var akb33 = "32223";
+    var akb34 = "N4EDAQpO2ejqgCoX";
+    var akb35 = "=qoKNLgdAjJbU8zx";
+    var akb36 = "mAkJqt8coXQ96zML";
+    var akb48 = "t4ABRmeN";
+    var base64 = new Base64;
+    function handle(m, p) {
+        $.post("test1",
+            {
+                param: getParam(m, p)
+            },
+            function (data, status) {
+                data = base64.decode(decryptData(data))
+                $.post("test2/" + p.city,
+                    {
+                        data: data
+                    },
+                    function (data, status) {
+                    });
+            });
+    }
+
+    ws.onmessage = function (msg) {
+        var dataObj = JSON.parse(msg.data)
+        var m = dataObj.method
+        var p = dataObj.param
+        console.log(m)
+        console.log(p)
+        handle(m, p);
+    }
+
+
+</script>
+
+</html>
